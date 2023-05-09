@@ -1,0 +1,108 @@
+<div class="formgrid grid">
+  <div class="col-6">
+    <p-panel header="Reactive Forms">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="p-fluid">
+        <div class="field">
+          <label>Pelicula:</label>
+          <br>
+          <input type="text" pInputText formControlName="pelicula" />
+          <small *ngIf="form.controls['pelicula'].errors && form.controls['pelicula'].touched">
+            Tiene errores
+          </small>
+        </div>
+
+        <div class="field">
+          <label>Genero:</label>
+          <br>
+          <!-- <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+          <input type="text" pInputText formControlName="genero"/>
+          
+          </span> -->
+          <div class="card flex justify-content-center">
+            <div class="card flex justify-content-center">
+              <p-multiSelect [options]="tipoGenero" formControlName="genero" [(ngModel)]="selectedGenero"
+                optionLabel="name"></p-multiSelect>
+            </div>
+          </div>
+
+
+          <div class="field">
+            <label>Estreno:</label>
+            <form [formGroup]="form">
+              <p-calendar formControlName="fechaEstreno"></p-calendar>
+            </form>
+          </div>
+
+          <div class="field">
+            <label>Ciudad:</label>
+            <form [formGroup]="form">
+              <p-cascadeSelect formControlName="pais" [options]="countries" optionLabel="cname" optionGroupLabel="name"
+                [optionGroupChildren]="['states', 'cities']" [style]="{ minWidth: '14rem' }"
+                placeholder="Select a City"></p-cascadeSelect>
+            </form>
+          </div>
+
+          <div class="flex flex-column gap-2">
+            <label htmlFor="restriccionEdad">Comentarios</label>
+
+            <div class="card flex justify-content-center">
+              <form [formGroup]="form">
+                <textarea rows="5" cols="30" pInputTextarea formControlName="restriccionEdad"></textarea>
+              </form>
+            </div>
+          </div>
+
+
+          <div class="field">
+            <label>Calificacion</label>
+            <div class="card flex justify-content-center">
+              <form [formGroup]="form">
+                <p-rating formControlName="calificacion"></p-rating>
+              </form>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Sala:</label>
+            <div class="card flex justify-content-center">
+              <p-selectButton formControlName="sala" [options]="paymentOptions" [(ngModel)]="value" [multiple]="true"
+                optionLabel="name" optionValue="value"></p-selectButton>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Idioma:</label>
+            <div class="card flex justify-content-center">
+              <form [formGroup]="form">
+                <p-listbox [options]="lenguaje" formControlName="idioma" optionLabel="name"
+                  [style]="{ width: '15rem' }"></p-listbox>
+              </form>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Aforo:</label>
+            <div class="card flex justify-content-center">
+              <form [formGroup]="form">
+                <p-knob formControlName="aforo"></p-knob>
+              </form>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Estado:</label>
+            <p-checkbox [(ngModel)]="estado" [binary]="true" formControlName="estado" inputId="binary"></p-checkbox>
+          </div>
+
+          <div class="field">
+            <button pButton type="submit" label="Guardar"></button>
+          </div>
+        </div>
+      </form>
+    </p-panel>
+  </div>
+</div>
+
+
+{{form.value|json}}
